@@ -1,0 +1,4 @@
+Tienes que depurar esto, para ello vas a usar la biblioteca mrunit
+
+https://cwiki.apache.org/confluence/display/MRUNIT/MRUnit+Tutorial
+
