@@ -12,6 +12,13 @@ import org.apache.hadoop.io.WritableComparable;
 import org.apache.hadoop.io.WritableComparator;
 import org.apache.hadoop.io.WritableUtils;
 
+/***
+ * esta es la clase que representa la tupla de valores que queremos escribir
+ * 
+ * @author aironman
+ * 
+ */
+
 public class MeasureWritable implements WritableComparable<MeasureWritable> {
 
 	private String year;
@@ -44,6 +51,7 @@ public class MeasureWritable implements WritableComparable<MeasureWritable> {
 
 	@Override
 	public int hashCode() {
+		// esto puede provocar colisiones, mejorable
 		return new HashCodeBuilder().append(province).append(year).toHashCode();
 	}
 
@@ -54,7 +62,8 @@ public class MeasureWritable implements WritableComparable<MeasureWritable> {
 		}
 
 		final MeasureWritable other = (MeasureWritable) o;
-		return new EqualsBuilder().append(province, other.province).append(year, other.year).isEquals();
+		return new EqualsBuilder().append(province, other.province).append(year, other.year)
+				.isEquals();
 	}
 
 	@Override
@@ -74,6 +83,9 @@ public class MeasureWritable implements WritableComparable<MeasureWritable> {
 			super(MeasureWritable.class);
 		}
 
+		/***
+		 * wtf!
+		 */
 		@Override
 		public int compare(byte[] b1, int s1, int l1, byte[] b2, int s2, int l2) {
 			try {

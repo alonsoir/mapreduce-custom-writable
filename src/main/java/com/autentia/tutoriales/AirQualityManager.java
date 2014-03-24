@@ -36,6 +36,7 @@ public class AirQualityManager extends Configured implements Tool {
 
 		@Override
 		protected void setup(Context context) throws IOException, InterruptedException {
+			//este campo viene como parametro del main, en concreto el 3º
 			this.measureType = context.getConfiguration().get(MEASURE_TYPE);
 		}
 
@@ -98,6 +99,7 @@ public class AirQualityManager extends Configured implements Tool {
 		final Configuration configuration = new Configuration();
 		configuration.set(MEASURE_TYPE, args[2]);
 
+		@SuppressWarnings("deprecation")
 		final Job job = new Job(configuration);
 
 		job.setJarByClass(AirQualityManager.class);
