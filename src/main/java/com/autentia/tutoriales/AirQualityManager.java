@@ -44,7 +44,7 @@ public class AirQualityManager extends Configured implements Tool {
 			final String[] values = value.toString().split(SEPARATOR);
 			final MeasureWritable measure = getMeasure(values, measureType);
 			final String measureValue = format(values[MeasureType.getOrder(measureType)]);
-
+			System.out.println(" =measureValue= " + measureValue);
 			if (measure != null && NumberUtils.isNumber(measureValue)) {
 				context.write(measure, new FloatWritable(Float.valueOf(measureValue)));
 			}
@@ -60,8 +60,9 @@ public class AirQualityManager extends Configured implements Tool {
 				final String province = format(values[PROVINCE_ORDER]);
 
 				measureWritable = new MeasureWritable(year, province);
+				System.out.println(" =measure= " + measureWritable.toString());
 			}
-
+			
 			return measureWritable;
 		}
 

@@ -33,8 +33,18 @@ public class AirQualityManagerTest {
 	
 	@Test
 	public void testMapper() throws IOException {
-		mapDriver.withInput(new LongWritable(), new Text("655209;1;796764372490213;804422938115889;6"));
-		mapDriver.withOutput(new MeasureWritable("2014", "badajoz"), new FloatWritable(1));
+		/***
+		 * 	01/01/1997;    1.2;12;33;63;56;;;;19;ÁVILA;Ávila
+			02/01/1997;    1.3;15;35;59;47;;;;17;ÁVILA;Ávila
+			03/01/1997;    1.5;18;43;54;65;;;;19;ÁVILA;Ávila
+			04/01/1997;    1.6;56;73;50;74;;;;22;ÁVILA;Ávila
+			05/01/1997;    1.4;11;33;63;54;;;;18;ÁVILA;Ávila
+			06/01/1997;    1.6;28;46;56;60;;;;20;ÁVILA;Ávila
+			07/01/1997;    1.5;19;41;58;47;;;;23;ÁVILA;Ávila
+
+		 * */
+		mapDriver.withInput(new LongWritable(), new Text("01/01/1997;1.2;12;33;63;56;;;;19;ÁVILA;Ávila"));
+		mapDriver.withOutput(new MeasureWritable("1997", "ÁVILA"), new FloatWritable(Float.valueOf("1.2")));
 		mapDriver.runTest();
 	}
 	
@@ -43,8 +53,8 @@ public class AirQualityManagerTest {
 		List<FloatWritable> values = new ArrayList<FloatWritable>();
 		values.add(new FloatWritable(1));
 		values.add(new FloatWritable(1));
-		reduceDriver.withInput(new MeasureWritable("2014", "badajoz"), values);
-		reduceDriver.withOutput(new MeasureWritable("2014", "badajoz"), new FloatWritable(1));
+		reduceDriver.withInput(new MeasureWritable("01/01/2014", "badajoz"), values);
+		reduceDriver.withOutput(new MeasureWritable("01/01/2014", "badajoz"), new FloatWritable(1));
 		reduceDriver.runTest();
 	}
 	
